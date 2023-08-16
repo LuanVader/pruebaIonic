@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registro de Compra</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <ion-list>
+    <ion-item>
+      <ion-select [(ngModel)]="idProducto"  label="Producto" placeholder="Selecione Producto">
+        <ion-select-option *ngFor="let producto of productos" [value]="producto.id">{{ producto.descripcion + '  -  ' + producto.precio }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Cantidad</ion-label>
+      <ion-input [(ngModel)]="cantidad" type="number"></ion-input>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-button type="button" (click)="addProducto()" color="primary" shape="full" expand="block">
+          Agregar Producto
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      Carrito de compras
+    </ion-list-header>
+    <ion-item lines="inset" *ngFor="let car of carrito">
+      <ion-label>
+        <h5>{{ car.descripcion }}  -  {{ car.precio }}  -  {{ car.cantidad }}  -  {{ car.subTotal }}</h5>
+      </ion-label>
+      <div class="item-note">
+        <ion-icon name="trash" style="zoom:2.0;" (click)="deleteCarrito(car.id)"></ion-icon>
+      </div>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-button type="button" (click)="comprar()" color="success" shape="full" expand="block">
+          Comprar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+</ion-content>
